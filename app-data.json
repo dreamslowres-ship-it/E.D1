@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "maxChars": 50,
+  "maxLines": 3,
+  "colors": [
+    { "hex": "FF0000", "name": "Rojo" },
+    { "hex": "FF4500", "name": "Naranja rojo" },
+    { "hex": "FF9000", "name": "Naranja" },
+    { "hex": "FFD700", "name": "Dorado" },
+    { "hex": "FFFF00", "name": "Amarillo" },
+    { "hex": "00FF00", "name": "Verde" },
+    { "hex": "03D200", "name": "Verde neón" },
+    { "hex": "00FFFF", "name": "Cian" },
+    { "hex": "09CAFF", "name": "Azul cielo" },
+    { "hex": "0000FF", "name": "Azul" },
+    { "hex": "6E00FF", "name": "Morado" },
+    { "hex": "9900FF", "name": "Violeta" },
+    { "hex": "FF00FF", "name": "Magenta" },
+    { "hex": "FF1493", "name": "Rosa" },
+    { "hex": "FFFFFF", "name": "Blanco" },
+    { "hex": "AAAAAA", "name": "Gris" },
+    { "hex": "000000", "name": "Negro" },
+    { "hex": "482B10", "name": "Marrón" }
+  ],
+  "symbols": [
+    "★", "☆", "♛", "♔", "♚", "♕", "☠", "✧", "✦", "❖", "◈",
+    "✿", "メ", "ツ", "シ", "么", "亗", "꧁", "꧂", "⸸", "†",
+    "✓", "✗", "×", "┊", "┋", "░", "▒", "█", "■", "●",
+    "♡", "❥", "ღ", "ᰔᩚ", "ᥫ᭡", "愛", "炎", "ϟ", "⚡",
+    "ㅤ"
+  ],
+  "adornos": [
+    { "symbol": "፝֟", "name": "Superior" },
+    { "symbol": "፞", "name": "Medio" },
+    { "symbol": "★", "name": "Estrella" },
+    { "symbol": "✧", "name": "Brillo" },
+    { "symbol": "♛", "name": "Corona" },
+    { "symbol": "亗", "name": "Marca" }
+  ],
+  "templates": [
+    { "id": "1", "name": "Rey", "code": "[FFD700]♛ [b]KING[/b] ♛", "style": "elegante" },
+    { "id": "2", "name": "Fuego", "code": "[FF0000]炎 [b]FIRE[/b]", "style": "agresivo" },
+    { "id": "3", "name": "Hielo", "code": "[00FFFF]◈ [i]ICE[/i]", "style": "minimal" },
+    { "id": "4", "name": "Veneno", "code": "[00FF00]☠ [b]TOXIC[/b]", "style": "agresivo" },
+    { "id": "5", "name": "Sombra", "code": "[6E00FF]⸸ [b]SHADOW[/b]", "style": "dark" },
+    { "id": "6", "name": "Elite", "code": "[FFD700]★ [b]ELITE[/b] ★", "style": "clan" },
+    { "id": "7", "name": "Ghost", "code": "[FFFFFF]ᰔᩚ [i]GHOST[/i]", "style": "minimal" },
+    { "id": "8", "name": "Neon", "code": "[03D200]ϟ [b]NEON[/b]", "style": "moderno" },
+    { "id": "9", "name": "Degradado oro", "code": "[FF0000]R[FF4000]O[FF8000]Y[FFBF00]A[FFFF00]L", "style": "degradado" },
+    { "id": "10", "name": "Clean", "code": "[c][FFFFFF][b]BOOYAH[/b]", "style": "minimal" }
+  ],
+  "gradientPresets": [
+    { "name": "Fuego", "c1": "FF0000", "c2": "FFD700" },
+    { "name": "Océano", "c1": "0000FF", "c2": "00FFFF" },
+    { "name": "Veneno", "c1": "00FF00", "c2": "FFFF00" },
+    { "name": "Rosa", "c1": "FF00FF", "c2": "FF1493" },
+    { "name": "Oro", "c1": "FFD700", "c2": "FFFFFF" },
+    { "name": "Noche", "c1": "6E00FF", "c2": "000000" }
+  ]
+}

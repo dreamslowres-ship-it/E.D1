@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <meta name="description" content="E.D — Editor de descripción para Free Fire. Colores, formato y símbolos válidos.">
+  <meta name="theme-color" content="#0c0c0e">
+  <title>E.D</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.85em' font-size='80'>E</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+  <div class="app" id="app">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">E.D</span>
+        <span class="brand-sub">Descripción FF</span>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" id="helpBtn" class="ghost-btn" title="Ayuda" aria-label="Ayuda">?</button>
+        <button type="button" id="themeBtn" class="ghost-btn" title="Tema" aria-label="Cambiar tema">◐</button>
+      </div>
+    </header>
+
+    <!-- Preview: exact description area -->
+    <section class="preview-section">
+      <div class="preview-label">Descripción <span class="preview-hint">máx. 3 líneas</span></div>
+      <div class="ff-signature" id="previewBox" aria-live="polite"></div>
+      <div id="statusLine" class="status-line">
+        <span id="charCounter">0 / 50</span>
+        <span id="lineCounter">0 / 3 líneas</span>
+        <span id="validBadge" class="badge" hidden></span>
+      </div>
+    </section>
+
+    <!-- Editor -->
+    <section class="editor-section">
+      <textarea id="bioInput" class="editor" placeholder="Escribe el código aquí…" rows="3" spellcheck="false" autocomplete="off"></textarea>
+    </section>
+
+    <!-- Toolbar -->
+    <nav class="toolbar" role="toolbar" aria-label="Formato">
+      <button type="button" class="tb" data-tag="b" title="Negrita"><b>B</b></button>
+      <button type="button" class="tb" data-tag="i" title="Cursiva"><i>I</i></button>
+      <button type="button" class="tb" data-tag="u" title="Subrayado"><u>U</u></button>
+      <button type="button" class="tb" data-tag="s" title="Tachado"><s>S</s></button>
+      <button type="button" class="tb" data-tag="c" title="Brillo / centrado">C</button>
+      <span class="tb-sep"></span>
+      <button type="button" class="tb" id="tabColors" data-panel="colors" title="Colores">Color</button>
+      <button type="button" class="tb" id="tabSymbols" data-panel="symbols" title="Símbolos">Símbolos</button>
+      <button type="button" class="tb" id="tabGradient" data-panel="gradient" title="Degradado">Degradado</button>
+      <button type="button" class="tb" id="tabTemplates" data-panel="templates" title="Plantillas">Plantillas</button>
+      <button type="button" class="tb" id="tabHistory" data-panel="history" title="Historial">Historial</button>
+    </nav>
+
+    <!-- Tool panels -->
+    <div class="panel-area">
+      <div id="panel-colors" class="panel active">
+        <div id="colorGrid" class="color-row"></div>
+        <div class="inline-row">
+          <input type="color" id="customColor" value="#FFD700" title="Color personalizado">
+          <button type="button" id="applyCustomColor" class="btn-sm">Aplicar</button>
+        </div>
+      </div>
+
+      <div id="panel-symbols" class="panel">
+        <div id="symbolsGrid" class="symbol-row"></div>
+        <p class="panel-tip">Solo Unicode que funciona en la descripción. El último es espacio invisible.</p>
+      </div>
+
+      <div id="panel-gradient" class="panel">
+        <div class="inline-row wrap">
+          <input type="text" id="gradientWord" class="field" placeholder="Palabra" maxlength="12">
+          <input type="color" id="gradientColor1" value="#FF0000">
+          <span class="muted">→</span>
+          <input type="color" id="gradientColor2" value="#FFD700">
+          <button type="button" id="applyGradientBtn" class="btn-sm">Aplicar</button>
+        </div>
+        <div id="gradientPresets" class="chip-row"></div>
+      </div>
+
+      <div id="panel-templates" class="panel">
+        <div id="templatesList" class="list"></div>
+      </div>
+
+      <div id="panel-history" class="panel">
+        <div class="chip-row mb">
+          <button type="button" class="chip active" data-hist="recent">Recientes</button>
+          <button type="button" class="chip" data-hist="favorites">Favoritos</button>
+        </div>
+        <div id="historyList" class="list"></div>
+        <div class="inline-row mt">
+          <button type="button" id="exportBtn" class="btn-sm ghost">Exportar</button>
+          <button type="button" id="importBtn" class="btn-sm ghost">Importar</button>
+          <input type="file" id="importFile" accept=".json" hidden>
+          <button type="button" id="clearHistBtn" class="btn-sm ghost danger">Vaciar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <footer class="actions">
+      <button type="button" id="clearBtn" class="btn ghost">Limpiar</button>
+      <button type="button" id="undoBtn" class="btn ghost">Deshacer</button>
+      <button type="button" id="favBtn" class="btn ghost" title="Favorito">★</button>
+      <button type="button" id="copyBtn" class="btn primary">Copiar</button>
+    </footer>
+  </div>
+
+  <!-- Toast -->
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <!-- Help -->
+  <div id="helpModal" class="modal" hidden>
+    <div class="modal-bg" data-close></div>
+    <div class="modal-box">
+      <button type="button" class="modal-x" data-close aria-label="Cerrar">×</button>
+      <h2>E.D</h2>
+      <p class="muted">Editor de descripción para Free Fire.</p>
+      <ul class="help-ul">
+        <li>Límite: <strong>50 caracteres</strong> (el código cuenta).</li>
+        <li>Máximo <strong>3 líneas</strong> en la descripción del juego.</li>
+        <li>Formato válido: <code>[b]</code> <code>[i]</code> <code>[u]</code> <code>[s]</code> <code>[c]</code> y <code>[RRGGBB]</code>.</li>
+        <li>Color se aplica hacia adelante hasta el siguiente color.</li>
+        <li>Símbolos: solo Unicode probado. Evita emojis de color.</li>
+        <li>El espacio invisible (último de la lista) sirve para separar.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
